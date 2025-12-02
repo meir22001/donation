@@ -1,0 +1,776 @@
+/**
+ * Sola Donation Form Styles
+ * Glassmorphism Design with RTL/LTR Support
+ */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* Root Variables */
+:root {
+    --primary-blue: #023047;
+    --accent-orange: #F49431;
+    --accent-orange-light: #ff9d47;
+    --white: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --input-bg: rgba(255, 255, 255, 0.6);
+    --shadow-sm: 0 2px 8px rgba(2, 48, 71, 0.05);
+    --shadow-md: 0 8px 24px rgba(2, 48, 71, 0.1);
+    --shadow-lg: 0 12px 32px rgba(2, 48, 71, 0.15);
+    --shadow-xl: 0 20px 40px rgba(2, 48, 71, 0.15);
+}
+
+/* Number Font */
+.number-font,
+.amount-symbol,
+.currency-symbol,
+.amount-display {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+/* Main Wrapper */
+.sola-donation-form-wrapper {
+    min-height: 100vh;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #023047 0%, #034561 50%, #023047 100%);
+    transition: direction 0.3s ease;
+}
+
+.sola-donation-form-wrapper[dir="rtl"] {
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    direction: rtl;
+}
+
+.sola-donation-form-wrapper[dir="ltr"] {
+    font-family: 'Inter', sans-serif;
+    direction: ltr;
+}
+
+/* Floating Background Elements */
+.floating-bg {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--accent-orange);
+    filter: blur(80px);
+    opacity: 0.15;
+    animation: float 20s infinite ease-in-out;
+}
+
+.floating-bg-1 {
+    width: 400px;
+    height: 400px;
+    top: 10%;
+    left: 10%;
+}
+
+.floating-bg-2 {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(20px, -20px) scale(1.1);
+    }
+
+    50% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    75% {
+        transform: translate(20px, 20px) scale(1.05);
+    }
+}
+
+/* Form Container */
+.sola-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+/* Form Header */
+.sola-form-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sola-form-header:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(2, 48, 71, 0.2);
+}
+
+.sola-title {
+    color: var(--primary-blue);
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.sola-subtitle {
+    color: var(--primary-blue);
+    opacity: 0.7;
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Language Toggle Button */
+.sola-lang-toggle {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 12px 32px;
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sola-lang-toggle:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Form Sections */
+.sola-form-section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-xl);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sola-form-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px rgba(2, 48, 71, 0.2);
+}
+
+/* Section Title */
+.sola-section-title {
+    color: var(--primary-blue);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sola-section-icon {
+    background: rgba(244, 148, 49, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-orange);
+}
+
+.sola-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+/* Security Badge */
+.sola-security-badge {
+    background: rgba(2, 48, 71, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(2, 48, 71, 0.1);
+    border-radius: 12px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-blue);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Form Rows */
+.sola-form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.sola-form-row:last-child {
+    margin-bottom: 0;
+}
+
+.sola-form-field {
+    flex: 1;
+}
+
+.sola-form-field.sola-full-width {
+    flex: 1 1 100%;
+}
+
+/* Field Label */
+.sola-field-label {
+    display: block;
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 12px;
+    opacity: 0.8;
+    font-size: 15px;
+}
+
+/* Input Wrapper */
+.sola-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Input Fields */
+.sola-input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    background: var(--input-bg);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(2, 48, 71, 0.1);
+    border-radius: 16px;
+    color: var(--primary-blue);
+    font-size: 15px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+}
+
+[dir="rtl"] .sola-input {
+    padding: 16px 48px 16px 16px;
+}
+
+.sola-input:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(244, 148, 49, 0.3);
+    transform: translateY(-1px);
+}
+
+.sola-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 0 4px rgba(244, 148, 49, 0.1), 0 8px 16px rgba(2, 48, 71, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Input Icon */
+.sola-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-blue);
+    opacity: 0.4;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+[dir="rtl"] .sola-icon {
+    left: auto;
+    right: 16px;
+}
+
+.sola-input:focus~.sola-icon,
+.sola-input:hover~.sola-icon {
+    color: var(--accent-orange);
+    opacity: 1;
+}
+
+/* Floating Label */
+.sola-label {
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-blue);
+    opacity: 0.5;
+    font-size: 15px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+[dir="rtl"] .sola-label {
+    left: auto;
+    right: 48px;
+}
+
+.sola-input:focus~.sola-label,
+.sola-input:not(:placeholder-shown)~.sola-label {
+    opacity: 0;
+}
+
+/* Button Groups */
+.sola-button-group {
+    display: flex;
+    gap: 12px;
+}
+
+.sola-option-btn {
+    flex: 1;
+    padding: 14px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(2, 48, 71, 0.1);
+    border-radius: 12px;
+    color: var(--primary-blue);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.sola-option-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(244, 148, 49, 0.1), rgba(244, 148, 49, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.sola-option-btn:hover::before {
+    opacity: 1;
+}
+
+.sola-option-btn:hover {
+    border-color: var(--accent-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(244, 148, 49, 0.25);
+}
+
+.sola-option-btn.active {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+    border-color: var(--accent-orange);
+    color: white;
+    box-shadow: 0 8px 24px rgba(244, 148, 49, 0.4);
+}
+
+/* Amount Grid */
+.sola-amount-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.sola-amount-btn {
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(2, 48, 71, 0.1);
+    border-radius: 12px;
+    color: var(--primary-blue);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.sola-amount-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(244, 148, 49, 0.1), rgba(244, 148, 49, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.sola-amount-btn:hover::before {
+    opacity: 1;
+}
+
+.sola-amount-btn:hover {
+    border-color: var(--accent-orange);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(244, 148, 49, 0.25);
+}
+
+.sola-amount-btn.active {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+    border-color: var(--accent-orange);
+    color: white;
+    box-shadow: 0 8px 24px rgba(244, 148, 49, 0.4);
+}
+
+.sola-custom-toggle {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Custom Amount Field */
+.sola-custom-amount {
+    margin-top: 16px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sola-custom-amount.active {
+    opacity: 1;
+    max-height: 100px;
+}
+
+/* Select Dropdown */
+select.sola-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23023047' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 48px;
+}
+
+[dir="rtl"] select.sola-input {
+    background-position: left 16px center;
+    padding-right: 16px;
+    padding-left: 48px;
+}
+
+/* Checkbox */
+.sola-checkbox-wrapper {
+    margin-top: 8px;
+}
+
+.sola-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(2, 48, 71, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sola-checkbox-label:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(244, 148, 49, 0.3);
+}
+
+.sola-checkbox {
+    display: none;
+}
+
+.sola-checkbox-custom {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border: 2px solid rgba(2, 48, 71, 0.2);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sola-checkbox:checked~.sola-checkbox-custom {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+    border-color: var(--accent-orange);
+}
+
+.sola-checkbox:checked~.sola-checkbox-custom::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sola-checkbox-text {
+    color: var(--primary-blue);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Card Type Logo */
+.card-type-logo {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+[dir="rtl"] .card-type-logo {
+    right: auto;
+    left: 16px;
+}
+
+.card-type-logo.visible {
+    opacity: 1;
+}
+
+/* Encryption Notice */
+.sola-encryption-notice {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-blue);
+    opacity: 0.6;
+    font-size: 13px;
+    margin-top: 16px;
+}
+
+/* Submit Button */
+.sola-submit-btn {
+    width: 100%;
+    padding: 20px 32px;
+    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 12px 32px rgba(244, 148, 49, 0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 12px 32px rgba(244, 148, 49, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 12px 32px rgba(244, 148, 49, 0.7);
+    }
+}
+
+.sola-submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.sola-submit-btn:hover::before {
+    left: 100%;
+}
+
+.sola-submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(244, 148, 49, 0.6);
+}
+
+.sola-submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.sola-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.heart-icon {
+    animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10%,
+    30% {
+        transform: scale(1.1);
+    }
+
+    20%,
+    40% {
+        transform: scale(1);
+    }
+}
+
+.btn-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spinner {
+    display: none;
+}
+
+.sola-submit-btn.loading .btn-text {
+    display: none;
+}
+
+.sola-submit-btn.loading .spinner {
+    display: block;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Messages */
+.sola-message {
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.sola-message.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1.5px solid rgba(34, 197, 94, 0.3);
+    color: #15803d;
+}
+
+.sola-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1.5px solid rgba(239, 68, 68, 0.3);
+    color: #991b1b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sola-donation-form-wrapper {
+        padding: 30px 15px;
+    }
+
+    .sola-form-header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px;
+    }
+
+    .sola-header-content {
+        text-align: center;
+    }
+
+    .sola-title {
+        font-size: 28px;
+    }
+
+    .sola-subtitle {
+        font-size: 16px;
+    }
+
+    .sola-lang-toggle {
+        width: 100%;
+    }
+
+    .sola-form-section {
+        padding: 24px;
+    }
+
+    .sola-form-row {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .sola-amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sola-custom-toggle {
+        grid-column: 1 / -1;
+    }
+
+    .sola-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .sola-submit-btn {
+        font-size: 18px;
+        padding: 18px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sola-title {
+        font-size: 24px;
+    }
+
+    .sola-subtitle {
+        font-size: 14px;
+    }
+
+    .sola-section-title {
+        font-size: 20px;
+    }
+
+    .sola-amount-grid {
+        grid-template-columns: 1fr;
+    }
+}
