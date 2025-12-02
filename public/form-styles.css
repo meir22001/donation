@@ -298,6 +298,11 @@
     padding: 14px 44px 14px 14px;
 }
 
+[dir="ltr"] .sola-input {
+    padding: 14px 14px 14px 44px;
+    text-align: left;
+}
+
 .sola-input:hover {
     border-color: rgba(244, 148, 49, 0.4);
     box-shadow: var(--shadow-md);
@@ -356,9 +361,38 @@
     right: 44px;
 }
 
+[dir="ltr"] .sola-label {
+    left: 44px;
+    right: auto;
+}
+
 .sola-input:focus~.sola-label,
 .sola-input:not(:placeholder-shown)~.sola-label {
     opacity: 0;
+}
+
+/* Validation Icon (for email) */
+.sola-validation-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+[dir="rtl"] .sola-validation-icon {
+    right: auto;
+    left: 14px;
+}
+
+.sola-validation-icon.valid {
+    color: #22c55e;
+}
+
+.sola-validation-icon.invalid {
+    color: #ef4444;
 }
 
 /* Button Groups */

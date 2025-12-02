@@ -54,7 +54,7 @@ if (!defined('ABSPATH')) {
                 <div class="sola-form-row">
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="text" name="firstName" id="firstName" class="sola-input" required>
+                            <input type="text" name="firstName" id="firstName" class="sola-input" required placeholder=" ">
                             <label class="sola-label" data-he="שם פרטי" data-en="First Name">שם פרטי</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -67,12 +67,14 @@ if (!defined('ABSPATH')) {
                     
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="text" name="lastName" id="lastName" class="sola-input" required>
+                            <input type="text" name="lastName" id="lastName" class="sola-input" required placeholder=" ">
                             <label class="sola-label" data-he="שם משפחה" data-en="Last Name">שם משפחה</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
+                                    <path d="M17 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M9 21v-2a4 4 0 0 1 3-3.87"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <circle cx="15" cy="7" r="4"></circle>
                                 </svg>
                             </span>
                         </div>
@@ -82,7 +84,7 @@ if (!defined('ABSPATH')) {
                 <div class="sola-form-row">
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="tel" name="phone" id="phone" class="sola-input" required>
+                            <input type="tel" name="phone" id="phone" class="sola-input" required placeholder=" ">
                             <label class="sola-label" data-he="טלפון" data-en="Phone">טלפון</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -94,7 +96,7 @@ if (!defined('ABSPATH')) {
                     
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="email" name="email" id="email" class="sola-input" required>
+                            <input type="email" name="email" id="email" class="sola-input" required placeholder=" ">
                             <label class="sola-label" data-he="דואר אלקטרוני" data-en="Email">דואר אלקטרוני</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -102,6 +104,7 @@ if (!defined('ABSPATH')) {
                                     <polyline points="22,6 12,13 2,6"></polyline>
                                 </svg>
                             </span>
+                            <span class="sola-validation-icon"></span>
                         </div>
                     </div>
                 </div>
@@ -326,31 +329,32 @@ if (!defined('ABSPATH')) {
                         </button>
                     </div>
                 </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="sola-submit-btn" id="submitBtn">
+                    <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="btn-text">
+                        <span data-he="תרום" data-en="Donate">תרום</span>
+                        <span class="amount-display number-font">₪100</span>
+                        <span data-he="עכשיו" data-en="Now">עכשיו</span>
+                    </span>
+                    <span class="spinner" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin">
+                            <line x1="12" y1="2" x2="12" y2="6"></line>
+                            <line x1="12" y1="18" x2="12" y2="22"></line>
+                            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                            <line x1="2" y1="12" x2="6" y2="12"></line>
+                            <line x1="18" y1="12" x2="22" y2="12"></line>
+                            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                        </svg>
+                    </span>
+                </button>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="sola-submit-btn" id="submitBtn">
-                <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                </svg>
-                <span class="btn-text">
-                    <span data-he="תרום" data-en="Donate">תרום</span>
-                    <span class="amount-display number-font">₪100</span>
-                    <span data-he="עכשיו" data-en="Now">עכשיו</span>
-                </span>
-                <span class="spinner" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin">
-                        <line x1="12" y1="2" x2="12" y2="6"></line>
-                        <line x1="12" y1="18" x2="12" y2="22"></line>
-                        <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                        <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                        <line x1="2" y1="12" x2="6" y2="12"></line>
-                        <line x1="18" y1="12" x2="22" y2="12"></line>
-                        <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-                        <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
-                    </svg>
-                </span>
-            </button>
             
             <!-- Messages -->
             <div class="sola-message" id="formMessage" style="display: none;"></div>

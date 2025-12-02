@@ -97,25 +97,16 @@
             html += `
                 <button type="button" class="sola-nav-btn btn-next">
                     <span class="nav-text" data-he="המשך אל פרטי תרומה" data-en="Continue to Donation Details">המשך אל פרטי תרומה</span>
-                    <svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
                 </button>
             `;
         } else if (step === 2) {
             // Back and next buttons
             html += `
                 <button type="button" class="sola-nav-btn btn-back">
-                    <svg class="nav-arrow nav-arrow-left" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
                     <span class="nav-text" data-he="חזור אל פרטים אישיים" data-en="Back to Personal Info">חזור אל פרטים אישיים</span>
                 </button>
                 <button type="button" class="sola-nav-btn btn-next">
                     <span class="nav-text" data-he="המשך לתשלום" data-en="Continue to Payment">המשך לתשלום</span>
-                    <svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
                 </button>
             `;
         }
@@ -346,6 +337,32 @@
      * Card Validation - ENHANCED WITH LOGOS
      */
     function initCardValidation() {
+        // Phone number formatting - only allow digits, +, -
+        $('#phone').on('input', function () {
+            let value = $(this).val();
+            // Remove anything that's not a digit, +, or -
+            value = value.replace(/[^0-9+\-]/g, '');
+            $(this).val(value);
+        });
+
+        // Email validation with visual feedback
+        $('#email').on('blur', function () {
+            const email = $(this).val();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const $validationIcon = $(this).siblings('.sola-validation-icon');
+
+            if (email && !emailRegex.test(email)) {
+                $(this).addClass('error');
+                $validationIcon.html('✗').addClass('invalid');
+            } else if (email) {
+                $(this).removeClass('error');
+                $validationIcon.html('✓').addClass('valid');
+            } else {
+                $(this).removeClass('error');
+                $validationIcon.html('').removeClass('valid invalid');
+            }
+        });
+
         // Card number formatting and validation
         $('#cardNumber').on('input', function () {
             let value = $(this).val().replace(/\s/g, '');
