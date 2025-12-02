@@ -24,15 +24,19 @@
         visa: /^4/,
         mastercard: /^(5[1-5]|2[2-7])/,
         amex: /^3[47]/,
-        discover: /^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5])|64[4-9]|65)/
+        discover: /^(6011|622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5])|64[4-9]|65)/,
+        diners: /^(30[0-5]|36|38)/,
+        jcb: /^35/
     };
 
-    // Card logos (SVG data URIs)
+    // Card logos (SVG file paths)
     const cardLogos = {
-        visa: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCA0OCAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHJ4PSI0IiBmaWxsPSIjMUQzMThEIi8+PHBhdGggZD0iTTE4IDEwSDIyTDIwIDE4SDE2TDE4IDEwWiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMjQgMTBMMjYgMThIMjhMMzAgMTBIMjRaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==',
-        mastercard: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCA0OCAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHJ4PSI0IiBmaWxsPSIjRUI2MDJEIi8+PGNpcmNsZSBjeD0iMTgiIGN5PSIxNiIgcj0iOCIgZmlsbD0iI0ZGNUIyQiIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMTYiIHI9IjgiIGZpbGw9IiNGNzcyMzYiLz48L3N2Zz4=',
-        amex: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCA0OCAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHJ4PSI0IiBmaWxsPSIjMDA4NkRFIi8+PHBhdGggZD0iTTEyIDEwSDIwTDE2IDE2TDIwIDIySDE2TDEyIDEwWiIgZmlsbD0id2hpdGUiLz48cGF0aCBkPSJNMjggMTBIMzZMMzIgMjJIMjhMMjggMTBaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==',
-        discover: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCA0OCAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDgiIGhlaWdodD0iMzIiIHJ4PSI0IiBmaWxsPSIjRkY2MjAwIi8+PGNpcmNsZSBjeD0iMjQiIGN5PSIxNiIgcj0iNiIgZmlsbD0id2hpdGUiLz48L3N2Zz4='
+        visa: solaDonation.pluginUrl + 'public/icons/visa.svg',
+        mastercard: solaDonation.pluginUrl + 'public/icons/mastercard.svg',
+        amex: solaDonation.pluginUrl + 'public/icons/amex.svg',
+        discover: solaDonation.pluginUrl + 'public/icons/discover.svg',
+        diners: solaDonation.pluginUrl + 'public/icons/diners.svg',
+        jcb: solaDonation.pluginUrl + 'public/icons/jcb.svg'
     };
 
     // Initialize when DOM is ready
@@ -148,6 +152,9 @@
         }, 300);
     }
 
+    // Expose goToStep globally for onclick handlers
+    window.solaDonationGoToStep = goToStep;
+
     function validateStep(step) {
         let isValid = true;
         const $section = $(`.sola-form-section[data-step="${step}"]`);
@@ -260,14 +267,16 @@
 
             if (type === 'monthly') {
                 $('#chargeDayRow').slideDown(300);
+                $('#chargeNowRow').slideDown(300);
             } else {
                 $('#chargeDayRow').slideUp(300);
+                $('#chargeNowRow').slideUp(300);
             }
         });
     }
 
     /**
-     * Amount Selection - ENHANCED
+     * Amount Selection - ENHANCED WITH SMOOTH TRANSITIONS
      */
     function initAmountSelection() {
         // Preset amounts
@@ -279,17 +288,19 @@
             $btn.addClass('active');
 
             // Reset custom amount
-            $('#customAmountBtn').removeClass('active editing');
-            $('#customAmountInput').hide();
+            const $customBtn = $('#customAmountBtn');
+            $customBtn.removeClass('active editing');
+            $('#customAmountInput').hide().val('');
             $('.custom-label').show();
-            $('#customAmountInput').val('');
+            $('.currency-symbol').hide();
+            $('.edit-icon').show();
 
             currentAmount = amount;
             $('#amount').val(amount);
             updateSubmitButton();
         });
 
-        // Custom amount button click
+        // Custom amount button click - toggle edit mode
         $('#customAmountBtn').on('click', function () {
             const $btn = $(this);
 
@@ -297,9 +308,15 @@
                 // Enter edit mode
                 $('.sola-amount-btn').removeClass('active');
                 $btn.addClass('active editing');
-                $('.custom-label').hide();
-                $('#customAmountInput').show().focus();
-                $('.currency-symbol').show();
+
+                // Smooth transition
+                $('.custom-label').fadeOut(150, function () {
+                    $('.edit-icon').fadeOut(100);
+                    $('.currency-symbol').fadeIn(200);
+                    $('#customAmountInput').fadeIn(200, function () {
+                        $(this).focus();
+                    });
+                });
             }
         });
 
@@ -313,15 +330,36 @@
             }
         });
 
-        // Click outside to close custom amount
+        // Handle focus loss - only exit edit mode if empty
+        $('#customAmountInput').on('blur', function () {
+            const value = $(this).val();
+            if (!value || parseFloat(value) <= 0) {
+                // Exit edit mode if empty
+                setTimeout(() => {
+                    const $customBtn = $('#customAmountBtn');
+                    $customBtn.removeClass('editing');
+
+                    $('#customAmountInput').fadeOut(150);
+                    $('.currency-symbol').fadeOut(150, function () {
+                        $('.custom-label').fadeIn(200);
+                        $('.edit-icon').fadeIn(200);
+                    });
+                }, 200);
+            }
+        });
+
+        // Global click outside  handler still useful for other buttons
         $(document).on('click', function (e) {
             const $customBtn = $('#customAmountBtn');
-            if (!$(e.target).closest('#customAmountBtn').length) {
+            if (!$(e.target).closest('#customAmountBtn').length &&
+                !$(e.target).closest('.sola-amount-btn:not(.sola-custom-amount-btn)').length) {
+                // Clicking outside - if custom is empty, reset it
                 if ($customBtn.hasClass('editing') && !$('#customAmountInput').val()) {
                     $customBtn.removeClass('active editing');
-                    $('#customAmountInput').hide();
+                    $('#customAmountInput').hide().val('');
                     $('.custom-label').show();
                     $('.currency-symbol').hide();
+                    $('.edit-icon').show();
                 }
             }
         });
@@ -353,10 +391,21 @@
 
             if (email && !emailRegex.test(email)) {
                 $(this).addClass('error');
-                $validationIcon.html('✗').addClass('invalid');
+                $validationIcon.html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                `).addClass('invalid').removeClass('valid');
             } else if (email) {
                 $(this).removeClass('error');
-                $validationIcon.html('✓').addClass('valid');
+                $validationIcon.html(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                `).addClass('valid').removeClass('invalid');
             } else {
                 $(this).removeClass('error');
                 $validationIcon.html('').removeClass('valid invalid');
@@ -418,28 +467,53 @@
 
     /**
      * Payment Methods (Google Pay / Apple Pay)
+     * Note: Requires merchant account verification and iFields integration
      */
     function initPaymentMethods() {
         // Check if Google Pay is available
-        if (window.google && window.google.payments) {
-            // Google Pay supported
-            console.log('Google Pay available');
+        const googlePayAvailable = window.google && window.google.payments;
+        if (googlePayAvailable) {
+            console.log('Google Pay available in browser');
         }
 
         // Check if Apple Pay is available
-        if (window.ApplePaySession) {
-            // Apple Pay supported
-            console.log('Apple Pay available');
+        const applePayAvailable = window.ApplePaySession && ApplePaySession.canMakePayments();
+        if (applePayAvailable) {
+            console.log('Apple Pay available in browser');
         }
 
-        // Placeholder handlers (need Sola API integration)
+        // Google Pay handler - Placeholder for merchant verification
         $('.sola-wallet-btn.google-pay').on('click', function () {
-            alert('Google Pay integration - requires Sola API setup');
+            const message = currentLang === 'he'
+                ? 'תשלום Google Pay זמין לאחר אימות merchant account.\n\nנדרש:\n• Merchant account מאושר\n• אינטגרציית iFields\n• אישור Google Pay'
+                : 'Google Pay available after merchant account verification.\n\nRequired:\n• Verified merchant account\n• iFields integration\n• Google Pay approval';
+
+            showMessage('error', message);
         });
 
+        // Apple Pay handler - Placeholder for merchant verification
         $('.sola-wallet-btn.apple-pay').on('click', function () {
-            alert('Apple Pay integration - requires Sola API setup');
+            const message = currentLang === 'he'
+                ? 'תשלום Apple Pay זמין לאחר אימות merchant account.\n\nנדרש:\n• Merchant account מאושר\n• רישום דומיין באפל\n• HTTPS\n• אינטגרציית iFields'
+                : 'Apple Pay available after merchant account verification.\n\nRequired:\n• Verified merchant account\n• Domain registered with Apple\n• HTTPS\n• iFields integration';
+
+            showMessage('error', message);
         });
+
+        // Future: Uncomment when merchant account is verified
+        /*
+        function initGooglePayIntegration() {
+            // Load iFields library
+            // Initialize Google Pay with iFields
+            // Process payment token
+        }
+        
+        function initApplePayIntegration() {
+            // Load iFields library  
+            // Initialize Apple Pay with iFields
+            // Process payment token
+        }
+        */
     }
 
     /**

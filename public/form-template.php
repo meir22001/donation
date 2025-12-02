@@ -129,11 +129,11 @@ if (!defined('ABSPATH')) {
                             <label class="sola-label" data-he="מספר עוסק / ת.ז" data-en="Tax ID">מספר עוסק / ת.ז</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                    <polyline points="14 2 14 8 20 8"></polyline>
-                                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    <circle cx="8" cy="10" r="2"></circle>
+                                    <path d="M14 8h4"></path>
+                                    <path d="M14 12h4"></path>
+                                    <path d="M6 16h12"></path>
                                 </svg>
                             </span>
                         </div>
@@ -181,25 +181,36 @@ if (!defined('ABSPATH')) {
                             <button type="button" class="sola-amount-btn active" data-value="100"><span class="amount-symbol">₪</span>100</button>
                             <button type="button" class="sola-amount-btn" data-value="180"><span class="amount-symbol">₪</span>180</button>
                             <button type="button" class="sola-amount-btn" data-value="500"><span class="amount-symbol">₪</span>500</button>
-                            <div class="sola-amount-btn sola-custom-amount-btn" id="customAmountBtn">
-                                <span class="custom-label" data-he="סכום אחר" data-en="Custom Amount">סכום אחר</span>
-                                <input type="number" class="custom-amount-input number-font" id="customAmountInput" min="1" step="0.01" placeholder="" style="display: none;">
-                                <span class="currency-symbol" style="display: none;">₪</span>
-                            </div>
+                            <button type="button" class="sola-amount-btn sola-custom-amount-btn" id="customAmountBtn">
+                            <span class="custom-label" data-he="סכום אחר" data-en="Custom Amount">סכום אחר</span>
+                            <span class="currency-symbol" style="display: none;">₪</span>
+                            <input type="number" 
+                                   class="custom-amount-input number-font" 
+                                   id="customAmountInput" 
+                                   min="1" 
+                                   step="0.01" 
+                                   placeholder="0"
+                                   style="display: none;">
+                            <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
                         </div>
                         <input type="hidden" name="amount" id="amount" value="100">
                     </div>
                 </div>
                 
-                <div class="sola-form-row" id="chargeDayRow">
+                <!-- Charge Day Selection (Monthly Only) -->
+                <div class="sola-form-row" id="chargeDayRow" style="display: none;">
                     <div class="sola-form-field">
-                        <label class="sola-field-label" data-he="יום לחיוב" data-en="Charge Day">יום לחיוב</label>
                         <div class="sola-input-wrapper">
-                            <select name="chargeDay" id="chargeDay" class="sola-input number-font">
+                            <select name="chargeDay" id="chargeDay" class="sola-input">
                                 <?php for ($i = 1; $i <= 28; $i++): ?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                                 <?php endfor; ?>
                             </select>
+                            <label class="sola-label" data-he="יום לחיוב" data-en="Charge Day">יום לחיוב</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -210,14 +221,14 @@ if (!defined('ABSPATH')) {
                             </span>
                         </div>
                     </div>
-                    
-                    <div class="sola-form-field">
+                </div>
+
+                <!-- Charge Now Checkbox (Monthly Only) -->
+                <div class="sola-form-row" id="chargeNowRow" style="display: none;">
+                    <div class="sola-form-field sola-checkbox-field">
                         <div class="sola-checkbox-wrapper">
-                            <label class="sola-checkbox-label">
-                                <input type="checkbox" name="chargeNow" id="chargeNow" class="sola-checkbox">
-                                <span class="sola-checkbox-custom"></span>
-                                <span class="sola-checkbox-text" data-he="לחייב את התרומה הראשונה מהחודש הנוכחי" data-en="Charge the first donation this month">לחייב את התרומה הראשונה מהחודש הנוכחי</span>
-                            </label>
+                            <input type="checkbox" name="chargeNow" id="chargeNow" class="sola-checkbox" checked>
+                            <label for="chargeNow" class="sola-checkbox-label" data-he="לחייב את התרומה הראשונה מהחודש הנוכחי" data-en="Charge first donation from current month">לחייב את התרומה הראשונה מהחודש הנוכחי</label>
                         </div>
                     </div>
                 </div>
@@ -301,22 +312,18 @@ if (!defined('ABSPATH')) {
                 <div class="sola-payment-methods">
                     <div class="sola-payment-methods-title" data-he="או תשלום מהיר" data-en="Or pay with">או תשלום מהיר</div>
                     <div class="sola-wallet-buttons">
-                        <button type="button" class="sola-wallet-btn google-pay">
+                        <button type="button" class="sola-wallet-btn google-pay" title="Requires merchant verification">
                             <svg width="41" height="17" viewBox="0 0 41 17" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19.5 8.5v3h-1.9c-.3 0-.5-.2-.5-.5v-5c0-.3.2-.5.5-.5h3.2c1.3 0 2.3 1 2.3 2.3s-1 2.3-2.3 2.3h-1.3zm0-3.7v2.4h1.3c.7 0 1.2-.5 1.2-1.2s-.5-1.2-1.2-1.2h-1.3z" fill="#5F6368"/>
-                                <path d="M26.9 9c0 1.7-1.3 2.9-2.9 2.9s-2.9-1.2-2.9-2.9 1.3-2.9 2.9-2.9 2.9 1.2 2.9 2.9zm-1.1 0c0-1.1-.8-1.9-1.8-1.9s-1.8.8-1.8 1.9.8 1.9 1.8 1.9 1.8-.8 1.8-1.9z" fill="#5F6368"/>
-                                <path d="M31.2 13.5c-1.6 0-2.9-1.2-2.9-2.9s1.3-2.9 2.9-2.9c.9 0 1.6.3 2.1.9l-.7.7c-.3-.4-.8-.6-1.4-.6-1 0-1.8.8-1.8 1.9s.8 1.9 1.8 1.9c.8 0 1.3-.5 1.5-1.1h-1.5v-.9h2.5c0 .1.1.3.1.5 0 1.6-1 2.5-2.6 2.5z" fill="#5F6368"/>
-                                <path d="M34.7 3.5h1.1v8h-1.1z" fill="#5F6368"/>
-                                <path d="M40.5 11v-2.5c0-1.3-.8-2.1-2-2.1-.7 0-1.4.3-1.7.9l.9.4c.2-.3.5-.4.9-.4.5 0 .9.3.9.8v.1c-.2-.1-.6-.2-1-.2-1 0-2 .5-2 1.5s1 1.5 1.9 1.5c.6 0 1.2-.3 1.4-.7h.1v.6h1v-2.9zm-.1 1c0 .8-.7 1.3-1.5 1.3-.5 0-1.1-.2-1.1-.7 0-.7.7-.9 1.4-.9.3 0 .7.1.9.2v.1z" fill="#5F6368"/>
-                                <path d="M11.1 7.3c0-.4 0-.7-.1-1.1H5.7v2.1h3c-.1.6-.5 1.1-1.1 1.4v1.4h1.8c1.1-1 1.7-2.4 1.7-3.8z" fill="#4285F4"/>
-                                <path d="M5.7 12.5c1.5 0 2.7-.5 3.6-1.3l-1.8-1.4c-.5.3-1.1.5-1.8.5-1.4 0-2.5-1-2.9-2.3H1v1.4c.9 1.7 2.7 2.9 4.7 2.9z" fill="#34A853"/>
-                                <path d="M2.8 8c-.1-.3-.2-.7-.2-1s.1-.7.2-1V4.6H1c-.4.7-.6 1.6-.6 2.4s.2 1.7.6 2.4L2.8 8z" fill="#FBBC05"/>
-                                <path d="M5.7 4.1c.8 0 1.5.3 2 .8l1.5-1.5c-.9-.8-2.1-1.3-3.6-1.3-2 0-3.8 1.2-4.7 2.9L2.8 6c.3-1.3 1.4-2.3 2.9-2.3z" fill="#EA4335"/>
+                                <path d="M19.526 2.635v4.083h2.518c.6 0 1.096-.202 1.488-.605.403-.402.605-.882.605-1.437 0-.544-.202-1.018-.605-1.422-.392-.413-.888-.62-1.488-.62h-2.518zm0 5.52v4.736h-1.504V1.198h3.99c1.013 0 1.873.337 2.582 1.012.72.675 1.08 1.497 1.08 2.466 0 .991-.36 1.819-1.08 2.482-.697.665-1.559.996-2.583.996h-2.485v.001zm7.668 2.287c0 .392.166.718.499.98.332.26.722.391 1.168.391.633 0 1.196-.234 1.692-.701.497-.469.744-1.019.744-1.65-.469-.37-1.123-.555-1.962-.555-.61 0-1.12.148-1.528.442-.409.294-.613.657-.613 1.093m1.946-5.815c1.112 0 1.989.297 2.633.89.642.594.964 1.408.964 2.442v4.932h-1.439v-1.11h-.065c-.622.914-1.45 1.372-2.486 1.372-.882 0-1.621-.262-2.215-.784-.594-.523-.891-1.176-.891-1.96 0-.828.313-1.486.94-1.976s1.463-.735 2.51-.735c.892 0 1.629.163 2.206.49v-.344c0-.522-.207-.966-.621-1.33a2.132 2.132 0 0 0-1.455-.547c-.84 0-1.504.353-1.995 1.062l-1.324-.834c.73-1.045 1.81-1.568 3.238-1.568m11.853.262l-5.02 11.53h-1.504l1.864-4.034-3.302-7.496h1.635l2.387 5.749h.032l2.322-5.75z" fill="#5F6368"/>
+                                <path d="M13.448 7.134c0-.474-.04-.93-.116-1.366H6.988v2.588h3.634a3.11 3.11 0 0 1-1.344 2.042v1.68h2.169c1.27-1.17 2.001-2.9 2.001-4.944" fill="#4285F4"/>
+                                <path d="M6.988 13.7c1.816 0 3.344-.595 4.459-1.621l-2.169-1.681c-.603.406-1.38.643-2.29.643-1.754 0-3.244-1.182-3.776-2.774H.978v1.731a6.728 6.728 0 0 0 6.01 3.703" fill="#34A853"/>
+                                <path d="M3.212 8.267a4.034 4.034 0 0 1 0-2.572V3.964H.978a6.678 6.678 0 0 0 0 6.034l2.234-1.731z" fill="#FBBC05"/>
+                                <path d="M6.988 2.921c.992 0 1.88.34 2.58 1.008v.001l1.92-1.918C10.324.928 8.804.262 6.989.262a6.728 6.728 0 0 0-6.01 3.702l2.234 1.731c.532-1.592 2.022-2.774 3.776-2.774" fill="#EA4335"/>
                             </svg>
                             <span data-he="Pay" data-en="Pay">Pay</span>
                         </button>
-                        <button type="button" class="sola-wallet-btn apple-pay">
-                            <svg width="40" height="17" viewBox="0 0 40 17" xmlns="http://www.w3.org/2000/svg">
+                        <button type="button" class="sola-wallet-btn apple-pay" title="Requires merchant verification">
+                            <svg class="apple-pay-logo" width="40" height="17" viewBox="0 0 40 17" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.8 2.8c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1-.4.5-.8 1.3-.7 2.1.8 0 1.5-.4 2-.9z" fill="white"/>
                                 <path d="M8.5 3.9c-1.1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6c-1.1 0-2.2.7-2.7 1.7-.2.5-.3 1-.3 1.5 0 2 1.5 4.9 3.4 4.9.9 0 1.5-.6 2.2-.6.7 0 1.2.6 2.2.6 1.9 0 3.1-2.7 3.1-2.7s-1.9-.7-1.9-2.8c0-1.8 1.5-2.6 1.5-2.6-1.2-1.5-2.9-1.5-3.8-1z" fill="white"/>
                                 <path d="M18.9 3.5h1.7c1 0 1.6.4 1.6 1.2 0 .5-.3.9-.8 1 .6.1 1 .6 1 1.2 0 .9-.7 1.4-1.8 1.4h-1.7V3.5zm1 1.9h.6c.4 0 .7-.2.7-.6s-.2-.6-.7-.6h-.6V5.4zm0 1.9h.7c.5 0 .8-.2.8-.6s-.3-.6-.8-.6h-.7v1.2z" fill="white"/>
@@ -328,6 +335,14 @@ if (!defined('ABSPATH')) {
                             <span data-he="Pay" data-en="Pay">Pay</span>
                         </button>
                     </div>
+                    </div>
+                </div>
+
+                <!-- Navigation for Step 3 -->
+                <div class="sola-form-navigation">
+                    <button type="button" class="sola-nav-btn btn-back" onclick="window.solaDonationGoToStep(2)">
+                        <span class="nav-text" data-he="חזור לפרטי תרומה" data-en="Back to Donation Details">חזור לפרטי תרומה</span>
+                    </button>
                 </div>
 
                 <!-- Submit Button -->

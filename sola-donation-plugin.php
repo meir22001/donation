@@ -3,8 +3,8 @@
  * Plugin Name: Sola Donation Plugin
  * Plugin URI: https://solapayments.com
  * Description: Professional bilingual (Hebrew/English) donation plugin with Sola Payments integration
- * Version: 1.1.2
- * Author: Your Name
+ * Version: 1.1.3
+ * Author: Meir Tedgi
  * Author URI: https://yourwebsite.com
  * Text Domain: sola-donation
  * Domain Path: /languages
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('SOLA_DONATION_VERSION', '1.1.2');
+define('SOLA_DONATION_VERSION', '1.1.3');
 define('SOLA_DONATION_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SOLA_DONATION_PLUGIN_URL', plugin_dir_url(__FILE__));
 
