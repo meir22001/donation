@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin Settings Page
+ * Settings Page Template
  */
 
 // Exit if accessed directly
@@ -9,6 +9,13 @@ if (!defined('ABSPATH')) {
 }
 
 $settings = get_option('sola_donation_settings');
+
+// Check for API validation result
+$api_validation = get_transient('sola_donation_api_validation');
+if ($api_validation !== false) {
+    delete_transient('sola_donation_api_validation');
+}
+
 $sandbox_mode = isset($settings['sandbox_mode']) ? $settings['sandbox_mode'] : true;
 $sandbox_key = isset($settings['sandbox_key']) ? $settings['sandbox_key'] : '';
 $production_key = isset($settings['production_key']) ? $settings['production_key'] : '';
@@ -43,6 +50,18 @@ if (isset($_POST['sola_donation_save'])) {
 
 <div class="wrap sola-donation-settings">
     <h1><?php echo esc_html__('Sola Donation Settings', 'sola-donation'); ?></h1>
+    
+    <?php if ($api_validation): ?>
+        <?php if ($api_validation['success']): ?>
+            <div class="notice notice-success is-dismissible">
+                <p><strong><?php echo esc_html__('Success!', 'sola-donation'); ?></strong> <?php echo esc_html($api_validation['message']); ?></p>
+            </div>
+        <?php else: ?>
+            <div class="notice notice-error is-dismissible">
+                <p><strong><?php echo esc_html__('Error!', 'sola-donation'); ?></strong> <?php echo esc_html($api_validation['message']); ?></p>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
     
     <form method="post" action="">
         <?php wp_nonce_field('sola_donation_settings_nonce'); ?>

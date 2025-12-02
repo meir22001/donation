@@ -52,36 +52,19 @@
      */
     function initMultiStep() {
         // Show first step by default
+        $('.sola-form-section').removeClass('active');
         $('.sola-form-section[data-step="1"]').addClass('active');
 
-        // Add step attribute to sections
-        $('.sola-form-section').each(function (index) {
-            $(this).attr('data-step', index + 1);
-        });
+        // Remove any existing navigation
+        $('.sola-form-navigation').remove();
 
-        // Create navigation buttons
-        $('.sola-form-section:not(:first-child)').append(`
-            <div class="sola-form-navigation">
-                <button type="button" class="sola-nav-btn btn-back">
-                    <span data-he="חזור" data-en="Back">חזור</span>
-                </button>
-                <button type="button" class="sola-nav-btn btn-next">
-                    <span data-he="המשך" data-en="Next">המשך</span>
-                </button>
-            </div>
-        `);
+        // Add navigation to step 1 (only next)
+        $('.sola-form-section[data-step="1"]').append(createNavigation(1));
 
-        // First section - only next button
-        $('.sola-form-section:first-child').append(`
-            <div class="sola-form-navigation">
-                <button type="button" class="sola-nav-btn btn-next" style="width: 100%;">
-                    <span data-he="המשך" data-en="Next">המשך</span>
-                </button>
-            </div>
-        `);
+        // Add navigation to step 2 (back + next)
+        $('.sola-form-section[data-step="2"]').append(createNavigation(2));
 
-        // Last section - just submit button (already exists)
-        $('.sola-form-section:last-child .sola-form-navigation').remove();
+        // Step 3 has submit button, no navigation needed
 
         // Navigation handlers
         $(document).on('click', '.btn-next', function () {
@@ -101,15 +84,60 @@
                 goToStep(stepNum);
             }
         });
+
+        // Update button texts on language change
+        updateNavigationTexts();
+    }
+
+    function createNavigation(step) {
+        let html = '<div class="sola-form-navigation">';
+
+        if (step === 1) {
+            // Only next button
+            html += `
+                <button type="button" class="sola-nav-btn btn-next">
+                    <span class="nav-text" data-he="המשך אל פרטי תרומה" data-en="Continue to Donation Details">המשך אל פרטי תרומה</span>
+                    <svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            `;
+        } else if (step === 2) {
+            // Back and next buttons
+            html += `
+                <button type="button" class="sola-nav-btn btn-back">
+                    <svg class="nav-arrow nav-arrow-left" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <span class="nav-text" data-he="חזור אל פרטים אישיים" data-en="Back to Personal Info">חזור אל פרטים אישיים</span>
+                </button>
+                <button type="button" class="sola-nav-btn btn-next">
+                    <span class="nav-text" data-he="המשך לתשלום" data-en="Continue to Payment">המשך לתשלום</span>
+                    <svg class="nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            `;
+        }
+
+        html += '</div>';
+        return html;
+    }
+
+    function updateNavigationTexts() {
+        const lang = currentLang;
+        $('.nav-text[data-he][data-en]').each(function () {
+            $(this).text($(this).data(lang));
+        });
     }
 
     function goToStep(stepNum) {
         if (stepNum < 1 || stepNum > 3) return;
 
-        // Hide current step
+        // Hide all steps
         $('.sola-form-section').removeClass('active');
 
-        // Show new step
+        // Show target step
         $(`.sola-form-section[data-step="${stepNum}"]`).addClass('active');
 
         // Update progress indicator
@@ -133,6 +161,28 @@
         let isValid = true;
         const $section = $(`.sola-form-section[data-step="${step}"]`);
 
+        // Validation messages
+        const messages = {
+            he: {
+                fillRequired: 'אנא מלא את כל השדות הנדרשים',
+                invalidEmail: 'כתובת אימייל לא תקינה',
+                selectAmount: 'אנא בחר סכום תרומה',
+                invalidCard: 'מספר כרטיס לא תקין',
+                invalidExpiry: 'תוקף לא תקין',
+                invalidCVV: 'CVV לא תקין'
+            },
+            en: {
+                fillRequired: 'Please fill all required fields',
+                invalidEmail: 'Invalid email address',
+                selectAmount: 'Please select a donation amount',
+                invalidCard: 'Invalid card number',
+                invalidExpiry: 'Invalid expiry date',
+                invalidCVV: 'Invalid CVV'
+            }
+        };
+
+        const msg = messages[currentLang];
+
         // Validate required fields in current step
         $section.find('input[required]').each(function () {
             if (!$(this).val() || $(this).val().trim() === '') {
@@ -144,9 +194,7 @@
         });
 
         if (!isValid) {
-            showMessage('error', currentLang === 'he'
-                ? 'אנא מלא את כל השדות הנדרשים'
-                : 'Please fill all required fields');
+            showMessage('error', msg.fillRequired);
         }
 
         return isValid;
@@ -173,6 +221,9 @@
             const $el = $(this);
             $el.text($el.data(lang));
         });
+
+        // Update navigation texts
+        updateNavigationTexts();
 
         updateSubmitButton();
     }
@@ -391,6 +442,28 @@
         let isValid = true;
         const $message = $('#formMessage');
 
+        // Validation messages
+        const messages = {
+            he: {
+                fillRequired: 'אנא מלא את כל השדות הנדרשים',
+                invalidEmail: 'כתובת אימייל לא תקינה',
+                selectAmount: 'אנא בחר סכום תרומה',
+                invalidCard: 'מספר כרטיס לא תקין',
+                invalidExpiry: 'תוקף לא תקין',
+                invalidCVV: 'CVV לא תקין'
+            },
+            en: {
+                fillRequired: 'Please fill all required fields',
+                invalidEmail: 'Invalid email address',
+                selectAmount: 'Please select a donation amount',
+                invalidCard: 'Invalid card number',
+                invalidExpiry: 'Invalid expiry date',
+                invalidCVV: 'Invalid CVV'
+            }
+        };
+
+        const msg = messages[currentLang];
+
         // Get all required fields
         const requiredFields = [
             'firstName', 'lastName', 'phone', 'email', 'address',
@@ -413,13 +486,15 @@
         if (email && !emailRegex.test(email)) {
             isValid = false;
             $('#email').addClass('error');
+            showMessage('error', msg.invalidEmail);
+            return false;
         }
 
         // Amount validation
         const amount = parseFloat($('#amount').val() || currentAmount);
         if (!amount || amount <= 0) {
             isValid = false;
-            showMessage('error', currentLang === 'he' ? 'אנא בחר סכום תרומה' : 'Please select a donation amount');
+            showMessage('error', msg.selectAmount);
             return false;
         }
 
@@ -427,7 +502,7 @@
         const cardNumber = $('#cardNumber').val().replace(/\s/g, '');
         if (cardNumber.length < 13) {
             isValid = false;
-            showMessage('error', currentLang === 'he' ? 'מספר כרטיס לא תקין' : 'Invalid card number');
+            showMessage('error', msg.invalidCard);
             return false;
         }
 
@@ -435,7 +510,7 @@
         const expiry = $('#expiry').val();
         if (!/^\d{2}\/\d{2}$/.test(expiry)) {
             isValid = false;
-            showMessage('error', currentLang === 'he' ? 'תוקף לא תקין' : 'Invalid expiry date');
+            showMessage('error', msg.invalidExpiry);
             return false;
         }
 
@@ -443,12 +518,12 @@
         const cvv = $('#cvv').val();
         if (cvv.length < 3 || cvv.length > 4) {
             isValid = false;
-            showMessage('error', currentLang === 'he' ? 'CVV לא תקין' : 'Invalid CVV');
+            showMessage('error', msg.invalidCVV);
             return false;
         }
 
         if (!isValid) {
-            showMessage('error', currentLang === 'he' ? 'אנא מלא את כל השדות הנדרשים' : 'Please fill all required fields');
+            showMessage('error', msg.fillRequired);
         }
 
         return isValid;
@@ -457,6 +532,22 @@
     function submitForm() {
         const $btn = $('#submitBtn');
         const $message = $('#formMessage');
+
+        // Success/Error messages
+        const messages = {
+            he: {
+                success: 'תודה על תרומתך! העסקה בוצעה בהצלחה.',
+                error: 'אירעה שגיאה בעיבוד התשלום. אנא נסה שוב.',
+                networkError: 'אירעה שגיאה בתקשורת. אנא נסה שוב.'
+            },
+            en: {
+                success: 'Thank you for your donation! Transaction completed successfully.',
+                error: 'An error occurred processing the payment. Please try again.',
+                networkError: 'A communication error occurred. Please try again.'
+            }
+        };
+
+        const msg = messages[currentLang];
 
         $btn.addClass('loading').prop('disabled', true);
         $message.hide();
@@ -489,10 +580,7 @@
             data: formData,
             success: function (response) {
                 if (response.success) {
-                    showMessage('success', currentLang === 'he'
-                        ? 'תודה על תרומתך! העסקה בוצעה בהצלחה.'
-                        : 'Thank you for your donation! Transaction completed successfully.'
-                    );
+                    showMessage('success', msg.success);
 
                     setTimeout(function () {
                         if (response.data.redirectUrl) {
@@ -504,18 +592,12 @@
                         }
                     }, 2000);
                 } else {
-                    showMessage('error', response.data.message || (currentLang === 'he'
-                        ? 'אירעה שגיאה בעיבוד התשלום. אנא נסה שוב.'
-                        : 'An error occurred processing the payment. Please try again.'
-                    ));
+                    showMessage('error', response.data.message || msg.error);
                     $btn.removeClass('loading').prop('disabled', false);
                 }
             },
             error: function () {
-                showMessage('error', currentLang === 'he'
-                    ? 'אירעה שגיאה בתקשורת. אנא נסה שוב.'
-                    : 'A communication error occurred. Please try again.'
-                );
+                showMessage('error', msg.networkError);
                 $btn.removeClass('loading').prop('disabled', false);
             }
         });

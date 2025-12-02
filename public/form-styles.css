@@ -32,8 +32,8 @@
 /* Main Wrapper */
 .sola-donation-form-wrapper {
     min-height: 100vh;
-    padding: 40px 20px;
-    background: linear-gradient(135deg, #f0f4f8 0%, #e8eef3 100%);
+    padding: 20px;
+    background: transparent;
     transition: direction 0.3s ease;
 }
 
@@ -593,35 +593,61 @@ select.sola-input {
 
 .sola-nav-btn {
     flex: 1;
-    padding: 16px 24px;
+    padding: 14px 20px;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     border: none;
-    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .sola-nav-btn.btn-back {
-    background: white;
-    color: var(--primary-blue);
-    border: 2px solid #e0e0e0;
+    background: #6b7280;
+    color: white;
+    flex-direction: row;
+}
+
+[dir="rtl"] .sola-nav-btn.btn-back {
+    flex-direction: row-reverse;
 }
 
 .sola-nav-btn.btn-back:hover {
-    border-color: var(--primary-blue);
-    box-shadow: var(--shadow-md);
+    background: #4b5563;
 }
 
 .sola-nav-btn.btn-next {
     background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
     color: white;
+    flex-direction: row;
+}
+
+[dir="rtl"] .sola-nav-btn.btn-next {
+    flex-direction: row-reverse;
 }
 
 .sola-nav-btn.btn-next:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--accent-orange-light), var(--accent-orange));
+}
+
+.nav-arrow {
+    flex-shrink: 0;
+}
+
+[dir="rtl"] .nav-arrow {
+    transform: scaleX(-1);
+}
+
+[dir="rtl"] .nav-arrow-left {
+    transform: scaleX(-1);
+}
+
+.nav-text {
+    white-space: nowrap;
 }
 
 /* Submit Button - REFINED */
@@ -639,18 +665,16 @@ select.sola-input {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    box-shadow: var(--shadow-lg);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     margin-top: 24px;
 }
 
 .sola-submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(244, 148, 49, 0.4);
+    background: linear-gradient(135deg, var(--accent-orange-light), var(--accent-orange));
 }
 
 .sola-submit-btn:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
 .sola-submit-btn:disabled {
@@ -659,11 +683,11 @@ select.sola-input {
 }
 
 .heart-icon {
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 .sola-submit-btn:hover .heart-icon {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .btn-text {

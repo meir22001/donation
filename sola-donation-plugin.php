@@ -92,7 +92,67 @@ function sola_donation_sanitize_settings($input) {
     $sanitized['redirect_url'] = esc_url_raw($input['redirect_url']);
     $sanitized['webhook_url'] = esc_url_raw($input['webhook_url']);
     
+    // Validate API key if provided
+    $key_to_test = $sanitized['sandbox_mode'] ? $sanitized['sandbox_key'] : $sanitized['production_key'];
+    
+    if (!empty($key_to_test)) {
+        $validation_result = sola_donation_validate_api_key($key_to_test, $sanitized['sandbox_mode']);
+        set_transient('sola_donation_api_validation', $validation_result, 30);
+    }
+    
     return $sanitized;
+}
+
+/**
+ * Validate API key by testing connection to Sola Payments
+ */
+function sola_donation_validate_api_key($xKey, $is_sandbox = true) {
+    $endpoint = 'https://x1.cardknox.com/gatewayjson';
+    
+    // Test request - just verify the key is valid
+    $request_data = array(
+        'xKey' => $xKey,
+        'xVersion' => '5.0.0',
+        'xSoftwareName' => 'SolaDonation',
+        'xSoftwareVersion' => SOLA_DONATION_VERSION,
+        'xCommand' => 'cc:sale',
+        'xAmount' => '0.00' // Zero dollar auth to test key
+    );
+    
+    $response = wp_remote_post($endpoint, array(
+        'body' => $request_data,
+        'timeout' => 15,
+        'sslverify' => true
+    ));
+    
+    if (is_wp_error($response)) {
+        return array(
+            'success' => false,
+            'message' => __('Could not connect to Sola Payments. Please check your internet connection.', 'sola-donation')
+        );
+    }
+    
+    $body = wp_remote_retrieve_body($response);
+    $data = json_decode($body, true);
+    
+    // Check if key is valid (even if transaction fails due to zero amount, key should be recognized)
+    if (isset($data['xError']) && (
+        strpos($data['xError'], 'Invalid xKey') !== false ||
+        strpos($data['xError'], 'Authentication') !== false ||
+        strpos($data['xError'], 'not authorized') !== false
+    )) {
+        return array(
+            'success' => false,
+            'message' => __('Invalid API Key. Please check your key and try again.', 'sola-donation')
+        );
+    }
+    
+    // If we got here, the key is at least recognized
+    $mode = $is_sandbox ? __('Sandbox', 'sola-donation') : __('Production', 'sola-donation');
+    return array(
+        'success' => true,
+        'message' => sprintf(__('API Key valid! Connected to Sola Payments (%s mode).', 'sola-donation'), $mode)
+    );
 }
 
 /**

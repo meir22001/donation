@@ -40,7 +40,7 @@ if (!defined('ABSPATH')) {
 
         <form id="solaDonationFormElement" class="sola-donation-form">
             <!-- Personal Details Section -->
-            <div class="sola-form-section">
+            <div class="sola-form-section" data-step="1">
                 <h2 class="sola-section-title">
                     <div class="sola-section-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -139,7 +139,7 @@ if (!defined('ABSPATH')) {
             </div>
 
             <!-- Donation Details Section -->
-            <div class="sola-form-section">
+            <div class="sola-form-section" data-step="2">
                 <h2 class="sola-section-title">
                     <div class="sola-section-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -221,7 +221,7 @@ if (!defined('ABSPATH')) {
             </div>
 
             <!-- Payment Details Section -->
-            <div class="sola-form-section">
+            <div class="sola-form-section" data-step="3">
                 <div class="sola-section-header">
                     <h2 class="sola-section-title">
                         <div class="sola-section-icon">
