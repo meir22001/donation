@@ -112,7 +112,7 @@ if (!defined('ABSPATH')) {
                 <div class="sola-form-row">
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="text" name="address" id="address" class="sola-input" required placeholder="">
+                            <input type="text" name="address" id="address" class="sola-input" required placeholder=" ">
                             <label class="sola-label" data-he="כתובת מגורים" data-en="Address">כתובת מגורים</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -202,7 +202,7 @@ if (!defined('ABSPATH')) {
                 </div>
                 
                 <!-- Charge Day Selection (Monthly Only) -->
-                <div class="sola-form-row" id="chargeDayRow" style="display: none;">
+                <div class="sola-form-row" id="chargeDayRow">
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
                             <select name="chargeDay" id="chargeDay" class="sola-input">
@@ -224,11 +224,12 @@ if (!defined('ABSPATH')) {
                 </div>
 
                 <!-- Charge Now Checkbox (Monthly Only) -->
-                <div class="sola-form-row" id="chargeNowRow" style="display: none;">
+                <div class="sola-form-row" id="chargeNowRow">
                     <div class="sola-form-field sola-checkbox-field">
                         <div class="sola-checkbox-wrapper">
                             <input type="checkbox" name="chargeNow" id="chargeNow" class="sola-checkbox" checked>
-                            <label for="chargeNow" class="sola-checkbox-label" data-he="לחייב את התרומה הראשונה מהחודש הנוכחי" data-en="Charge first donation from current month">לחייב את התרומה הראשונה מהחודש הנוכחי</label>
+                            <div class="sola-checkbox-custom"></div>
+                            <span class="sola-checkbox-text" data-he="לחייב את התרומה הראשונה מהחודש הנוכחי" data-en="Charge first donation from current month">לחייב את התרומה הראשונה מהחודש הנוכחי</span>
                         </div>
                     </div>
                 </div>
@@ -257,7 +258,7 @@ if (!defined('ABSPATH')) {
                 <div class="sola-form-row">
                     <div class="sola-form-field sola-full-width">
                         <div class="sola-input-wrapper">
-                            <input type="text" name="cardNumber" id="cardNumber" class="sola-input number-font" maxlength="19" required autocomplete="cc-number">
+                            <input type="text" name="cardNumber" id="cardNumber" class="sola-input number-font" maxlength="19" required autocomplete="cc-number" placeholder=" ">
                             <label class="sola-label" data-he="מספר כרטיס אשראי" data-en="Credit Card Number">מספר כרטיס אשראי</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="cardIcon">
@@ -273,7 +274,7 @@ if (!defined('ABSPATH')) {
                 <div class="sola-form-row">
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="text" name="expiry" id="expiry" class="sola-input number-font" placeholder="MM/YY" maxlength="5" required autocomplete="cc-exp">
+                            <input type="text" name="expiry" id="expiry" class="sola-input number-font" placeholder=" " maxlength="5" required autocomplete="cc-exp">
                             <label class="sola-label" data-he="תוקף" data-en="Expiry">תוקף</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -288,7 +289,7 @@ if (!defined('ABSPATH')) {
                     
                     <div class="sola-form-field">
                         <div class="sola-input-wrapper">
-                            <input type="text" name="cvv" id="cvv" class="sola-input number-font" maxlength="4" required autocomplete="cc-csc">
+                            <input type="text" name="cvv" id="cvv" class="sola-input number-font" maxlength="4" required autocomplete="cc-csc" placeholder=" ">
                             <label class="sola-label" data-he="CVV" data-en="CVV">CVV</label>
                             <span class="sola-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -332,42 +333,41 @@ if (!defined('ABSPATH')) {
                                 <path d="M34.8 8.3h-.9v-2c0-.7-.3-1-.8-1-.5 0-.9.4-.9 1v2h-.9v-3.5h.9v.5h.1c.2-.4.6-.6 1.1-.6 1 0 1.5.6 1.5 1.5v2.1z" fill="white"/>
                                 <path d="M37.9 8.3l-.1-.4h-.1c-.2.3-.6.5-1.1.5-.7 0-1.2-.5-1.2-1.1 0-.9.7-1.3 2.3-1.3v-.1c0-.4-.2-.6-.7-.6s-.9.2-1.2.5l-.3-.6c.4-.4 1-.6 1.6-.6 1 0 1.5.5 1.5 1.5v2.2h-.7zm-.2-1.7c-1 0-1.4.2-1.4.7s.2.5.6.5c.5 0 .9-.3.9-.8v-.4z" fill="white"/>
                             </svg>
-                            <span data-he="Pay" data-en="Pay">Pay</span>
                         </button>
                     </div>
                     </div>
                 </div>
 
-                <!-- Navigation for Step 3 -->
+                <!-- Navigation for Step 3 with Submit Button -->
                 <div class="sola-form-navigation">
                     <button type="button" class="sola-nav-btn btn-back" onclick="window.solaDonationGoToStep(2)">
                         <span class="nav-text" data-he="חזור לפרטי תרומה" data-en="Back to Donation Details">חזור לפרטי תרומה</span>
                     </button>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="sola-submit-btn" id="submitBtn">
-                    <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                    <span class="btn-text">
-                        <span data-he="תרום" data-en="Donate">תרום</span>
-                        <span class="amount-display number-font">₪100</span>
-                        <span data-he="עכשיו" data-en="Now">עכשיו</span>
-                    </span>
-                    <span class="spinner" style="display: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin">
-                            <line x1="12" y1="2" x2="12" y2="6"></line>
-                            <line x1="12" y1="18" x2="12" y2="22"></line>
-                            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
-                            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
-                            <line x1="2" y1="12" x2="6" y2="12"></line>
-                            <line x1="18" y1="12" x2="22" y2="12"></line>
-                            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
-                            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="sola-submit-btn" id="submitBtn">
+                        <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                         </svg>
-                    </span>
-                </button>
+                        <span class="btn-text">
+                            <span data-he="תרום" data-en="Donate">תרום</span>
+                            <span class="amount-display number-font">₪100</span>
+                            <span data-he="עכשיו" data-en="Now">עכשיו</span>
+                        </span>
+                        <span class="spinner" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin">
+                                <line x1="12" y1="2" x2="12" y2="6"></line>
+                                <line x1="12" y1="18" x2="12" y2="22"></line>
+                                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                                <line x1="2" y1="12" x2="6" y2="12"></line>
+                                <line x1="18" y1="12" x2="22" y2="12"></line>
+                                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
             </div>
 
             

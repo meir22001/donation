@@ -752,6 +752,7 @@ select.sola-input {
     color: var(--primary-blue);
     font-weight: 500;
     font-size: 14px;
+    flex: 1;
 }
 
 /* Card Type Logo - USING IMAGES */
@@ -871,15 +872,14 @@ button#submitBtn,
     font-size: 18px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
-    display: none !important;
-    /* CRITICAL: Hidden by default */
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 12px !important;
     transition: all 0.2s ease !important;
     margin-top: 24px !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* CRITICAL: Show submit button ONLY when in step 3 */
@@ -1058,12 +1058,27 @@ button#submitBtn,
 
 /* Messages */
 .sola-message {
-    margin-top: 20px;
-    padding: 14px 20px;
-    border-radius: 12px;
+    max-width: 800px;
+    margin: 20px auto 0;
+    padding: 16px 24px;
+    border-radius: 14px;
     font-size: 15px;
     font-weight: 600;
     text-align: center;
+    box-shadow: var(--shadow-md);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .sola-message.success {
