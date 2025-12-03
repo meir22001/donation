@@ -301,13 +301,13 @@
     text-indent: 0 !important;
 }
 
+.sola-donation-form-wrapper[dir="rtl"] .sola-input,
 [dir="rtl"] .sola-donation-form-wrapper .sola-input,
-[dir="rtl"] .sola-input {
-    padding: 14px 14px 14px 14px !important;
-    padding-right: 44px !important;
-    padding-left: 14px !important;
+[dir="rtl"] .sola-input,
+body[dir="rtl"] .sola-input {
+    padding: 14px 44px 14px 14px !important;
     text-align: right !important;
-    text-indent: 0 !important;
+    direction: rtl !important;
 }
 
 [dir="ltr"] .sola-donation-form-wrapper .sola-input,
@@ -555,7 +555,9 @@ select.sola-input {
 }
 
 .sola-option-btn:hover {
-    border-color: var(--primary-blue);
+    border-color: #023047;
+    background: #023047;
+    color: white;
     box-shadow: var(--shadow-md);
 }
 
@@ -589,7 +591,9 @@ select.sola-input {
 }
 
 .sola-amount-btn:hover {
-    border-color: var(--primary-blue);
+    border-color: #023047;
+    background: #023047;
+    color: white;
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
