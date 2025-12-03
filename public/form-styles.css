@@ -280,39 +280,48 @@
     width: 100%;
 }
 
-/* Input Fields - ENHANCED DESIGN */
+/* Input Fields - ENHANCED DESIGN - Maximum Specificity */
+.sola-donation-form-wrapper .sola-input,
+.sola-donation-form-wrapper input.sola-input,
+.sola-donation-form-wrapper select.sola-input,
 .sola-input {
-    width: 100%;
-    padding: 14px 14px 14px 44px;
-    background: var(--input-bg);
-    border: 2px solid #e0e0e0;
+    width: 100% !important;
+    padding: 14px 14px 14px 44px !important;
+    background: var(--input-bg) !important;
+    border: 2px solid #e0e0e0 !important;
     border-radius: 14px !important;
-    color: var(--primary-blue);
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    box-shadow: var(--shadow-sm) !important;
+    color: var(--primary-blue) !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 1px 3px rgba(2, 48, 71, 0.08) !important;
+    -webkit-border-radius: 14px !important;
+    -moz-border-radius: 14px !important;
 }
 
+[dir="rtl"] .sola-donation-form-wrapper .sola-input,
 [dir="rtl"] .sola-input {
-    padding: 14px 44px 14px 14px;
+    padding: 14px 44px 14px 14px !important;
 }
 
+[dir="ltr"] .sola-donation-form-wrapper .sola-input,
 [dir="ltr"] .sola-input {
-    padding: 14px 14px 14px 44px;
-    text-align: left;
+    padding: 14px 14px 14px 44px !important;
+    text-align: left !important;
 }
 
+.sola-donation-form-wrapper .sola-input:hover,
 .sola-input:hover {
-    border-color: rgba(244, 148, 49, 0.4);
-    box-shadow: var(--shadow-md) !important;
+    border-color: rgba(244, 148, 49, 0.4) !important;
+    box-shadow: 0 4px 12px rgba(2, 48, 71, 0.1) !important;
 }
 
+.sola-donation-form-wrapper .sola-input:focus,
 .sola-input:focus {
-    outline: none;
-    background: white;
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 0 3px rgba(244, 148, 49, 0.1), var(--shadow-md) !important;
+    outline: none !important;
+    background: white !important;
+    border-color: #F49431 !important;
+    box-shadow: 0 0 0 3px rgba(244, 148, 49, 0.1), 0 4px 12px rgba(2, 48, 71, 0.1) !important;
 }
 
 /* Enhanced Error State */
@@ -848,28 +857,48 @@ select.sola-input {
     white-space: nowrap;
 }
 
-/* Submit Button - REFINED - Only visible in step 3 */
+/* Submit Button - REFINED - Only visible in step 3 - CRITICAL VISIBILITY CONTROL */
+.sola-donation-form-wrapper .sola-submit-btn,
+.sola-donation-form button.sola-submit-btn,
+button#submitBtn,
 .sola-submit-btn {
-    width: 100%;
-    padding: 18px 32px;
-    background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-light) 100%);
-    border: none;
-    border-radius: 14px;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    transition: all 0.2s ease;
-    margin-top: 24px;
+    width: 100% !important;
+    padding: 18px 32px !important;
+    background: linear-gradient(135deg, #F49431 0%, #ff9d47 100%) !important;
+    border: none !important;
+    border-radius: 14px !important;
+    color: white !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: none !important;
+    /* CRITICAL: Hidden by default */
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    transition: all 0.2s ease !important;
+    margin-top: 24px !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
-/* Show submit button only when in step 3 */
+/* CRITICAL: Show submit button ONLY when in step 3 */
+.sola-donation-form-wrapper .sola-form-section[data-step="3"].active .sola-submit-btn,
+.sola-form-section[data-step="3"].active button#submitBtn,
 .sola-form-section[data-step="3"].active .sola-submit-btn {
-    display: flex;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* CRITICAL: Ensure button is hidden in steps 1 and 2 */
+.sola-form-section[data-step="1"] .sola-submit-btn,
+.sola-form-section[data-step="2"] .sola-submit-btn,
+.sola-form-section[data-step="1"] button#submitBtn,
+.sola-form-section[data-step="2"] button#submitBtn {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 .sola-submit-btn:hover {
