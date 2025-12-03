@@ -286,12 +286,12 @@
     padding: 14px 14px 14px 44px;
     background: var(--input-bg);
     border: 2px solid #e0e0e0;
-    border-radius: 14px;
+    border-radius: 14px !important;
     color: var(--primary-blue);
     font-size: 15px;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-sm) !important;
 }
 
 [dir="rtl"] .sola-input {
@@ -305,14 +305,14 @@
 
 .sola-input:hover {
     border-color: rgba(244, 148, 49, 0.4);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md) !important;
 }
 
 .sola-input:focus {
     outline: none;
     background: white;
     border-color: var(--accent-orange);
-    box-shadow: 0 0 0 3px rgba(244, 148, 49, 0.1), var(--shadow-md);
+    box-shadow: 0 0 0 3px rgba(244, 148, 49, 0.1), var(--shadow-md) !important;
 }
 
 /* Enhanced Error State */
@@ -488,15 +488,15 @@ select.sola-input {
     padding: 14px;
     background: var(--input-bg);
     border: 2px solid #e0e0e0;
-    border-radius: 14px;
-    box-shadow: var(--shadow-sm);
+    border-radius: 14px !important;
+    box-shadow: var(--shadow-sm) !important;
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .sola-checkbox-wrapper:hover {
     border-color: rgba(244, 148, 49, 0.4);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-md) !important;
 }
 
 .sola-checkbox {
@@ -848,7 +848,7 @@ select.sola-input {
     white-space: nowrap;
 }
 
-/* Submit Button - REFINED */
+/* Submit Button - REFINED - Only visible in step 3 */
 .sola-submit-btn {
     width: 100%;
     padding: 18px 32px;
@@ -859,12 +859,17 @@ select.sola-input {
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    display: flex;
+    display: none; /* Hidden by default */
     align-items: center;
     justify-content: center;
     gap: 12px;
     transition: all 0.2s ease;
     margin-top: 24px;
+}
+
+/* Show submit button only when in step 3 */
+.sola-form-section[data-step="3"].active .sola-submit-btn {
+    display: flex;
 }
 
 .sola-submit-btn:hover {
