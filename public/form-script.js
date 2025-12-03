@@ -129,6 +129,10 @@
     function goToStep(stepNum) {
         if (stepNum < 1 || stepNum > 3) return;
 
+        // Clear any error messages and states when changing steps
+        $('#formMessage').slideUp(300);
+        $('.sola-input').removeClass('error');
+
         // Hide all steps
         $('.sola-form-section').removeClass('active');
 
@@ -266,11 +270,9 @@
             $('#donationType').val(type);
 
             if (type === 'monthly') {
-                $('#chargeDayRow').slideDown(300);
-                $('#chargeNowRow').slideDown(300);
+                $('#chargeMonthlyRow').slideDown(300);
             } else {
-                $('#chargeDayRow').slideUp(300);
-                $('#chargeNowRow').slideUp(300);
+                $('#chargeMonthlyRow').slideUp(300);
             }
         });
     }

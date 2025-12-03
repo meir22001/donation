@@ -201,9 +201,10 @@ if (!defined('ABSPATH')) {
                     </div>
                 </div>
                 
-                <!-- Charge Day Selection (Monthly Only) -->
-                <div class="sola-form-row" id="chargeDayRow">
+                <!-- Charge Day Selection and First Charge Checkbox (Monthly Only) -->
+                <div class="sola-form-row" id="chargeMonthlyRow">
                     <div class="sola-form-field">
+                        <label class="sola-field-label" data-he="בחירת יום לחיוב" data-en="Select Charge Day">בחירת יום לחיוב</label>
                         <div class="sola-input-wrapper">
                             <select name="chargeDay" id="chargeDay" class="sola-input">
                                 <?php for ($i = 1; $i <= 28; $i++): ?>
@@ -221,11 +222,9 @@ if (!defined('ABSPATH')) {
                             </span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Charge Now Checkbox (Monthly Only) -->
-                <div class="sola-form-row" id="chargeNowRow">
+                    
                     <div class="sola-form-field sola-checkbox-field">
+                        <label class="sola-field-label" style="opacity: 0; pointer-events: none;">‎</label>
                         <div class="sola-checkbox-wrapper">
                             <input type="checkbox" name="chargeNow" id="chargeNow" class="sola-checkbox" checked>
                             <div class="sola-checkbox-custom"></div>
@@ -324,15 +323,10 @@ if (!defined('ABSPATH')) {
                             <span data-he="Pay" data-en="Pay">Pay</span>
                         </button>
                         <button type="button" class="sola-wallet-btn apple-pay" title="Requires merchant verification">
-                            <svg class="apple-pay-logo" width="40" height="17" viewBox="0 0 40 17" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.8 2.8c.5-.6.8-1.4.7-2.2-.7 0-1.5.5-2 1-.4.5-.8 1.3-.7 2.1.8 0 1.5-.4 2-.9z" fill="white"/>
-                                <path d="M8.5 3.9c-1.1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6c-1.1 0-2.2.7-2.7 1.7-.2.5-.3 1-.3 1.5 0 2 1.5 4.9 3.4 4.9.9 0 1.5-.6 2.2-.6.7 0 1.2.6 2.2.6 1.9 0 3.1-2.7 3.1-2.7s-1.9-.7-1.9-2.8c0-1.8 1.5-2.6 1.5-2.6-1.2-1.5-2.9-1.5-3.8-1z" fill="white"/>
-                                <path d="M18.9 3.5h1.7c1 0 1.6.4 1.6 1.2 0 .5-.3.9-.8 1 .6.1 1 .6 1 1.2 0 .9-.7 1.4-1.8 1.4h-1.7V3.5zm1 1.9h.6c.4 0 .7-.2.7-.6s-.2-.6-.7-.6h-.6V5.4zm0 1.9h.7c.5 0 .8-.2.8-.6s-.3-.6-.8-.6h-.7v1.2z" fill="white"/>
-                                <path d="M26.4 8.3h-1l-.5-1.7h-1.8l-.5 1.7h-1l1.8-4.8h1l1.8 4.8zM24.7 5.9l-.6-1.8h-.1l-.6 1.8h1.3z" fill="white"/>
-                                <path d="M30.5 8.3h-.9v-2c0-.7-.3-1-.8-1-.5 0-.9.4-.9 1v2h-.9v-3.5h.9v.5h.1c.2-.4.6-.6 1.1-.6 1 0 1.5.6 1.5 1.5v2.1z" fill="white"/>
-                                <path d="M34.8 8.3h-.9v-2c0-.7-.3-1-.8-1-.5 0-.9.4-.9 1v2h-.9v-3.5h.9v.5h.1c.2-.4.6-.6 1.1-.6 1 0 1.5.6 1.5 1.5v2.1z" fill="white"/>
-                                <path d="M37.9 8.3l-.1-.4h-.1c-.2.3-.6.5-1.1.5-.7 0-1.2-.5-1.2-1.1 0-.9.7-1.3 2.3-1.3v-.1c0-.4-.2-.6-.7-.6s-.9.2-1.2.5l-.3-.6c.4-.4 1-.6 1.6-.6 1 0 1.5.5 1.5 1.5v2.2h-.7zm-.2-1.7c-1 0-1.4.2-1.4.7s.2.5.6.5c.5 0 .9-.3.9-.8v-.4z" fill="white"/>
+                            <svg class="apple-logo" width="20" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white">
+                                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
                             </svg>
+                            <span class="pay-text">Pay</span>
                         </button>
                     </div>
                     </div>

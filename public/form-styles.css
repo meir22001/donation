@@ -99,7 +99,7 @@
 }
 
 .sola-lang-toggle:hover {
-    background: #034561;
+    background: #023047;
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -286,7 +286,8 @@
 .sola-donation-form-wrapper select.sola-input,
 .sola-input {
     width: 100% !important;
-    padding: 14px 14px 14px 44px !important;
+    padding: 14px 14px 14px 14px !important;
+    padding-left: 44px !important;
     background: var(--input-bg) !important;
     border: 2px solid #e0e0e0 !important;
     border-radius: 14px !important;
@@ -297,17 +298,24 @@
     box-shadow: 0 1px 3px rgba(2, 48, 71, 0.08) !important;
     -webkit-border-radius: 14px !important;
     -moz-border-radius: 14px !important;
+    text-indent: 0 !important;
 }
 
 [dir="rtl"] .sola-donation-form-wrapper .sola-input,
 [dir="rtl"] .sola-input {
-    padding: 14px 44px 14px 14px !important;
+    padding: 14px 14px 14px 14px !important;
+    padding-right: 44px !important;
+    padding-left: 14px !important;
+    text-indent: 0 !important;
 }
 
 [dir="ltr"] .sola-donation-form-wrapper .sola-input,
 [dir="ltr"] .sola-input {
-    padding: 14px 14px 14px 44px !important;
+    padding: 14px 14px 14px 14px !important;
+    padding-left: 44px !important;
+    padding-right: 14px !important;
     text-align: left !important;
+    text-indent: 0 !important;
 }
 
 .sola-donation-form-wrapper .sola-input:hover,
@@ -368,12 +376,14 @@ select.sola-input {
 
 [dir="ltr"] select.sola-input {
     background-position: right 14px center;
-    padding-right: 40px;
+    padding-right: 44px !important;
+    padding-left: 44px !important;
 }
 
 [dir="rtl"] select.sola-input {
     background-position: left 14px center;
-    padding-left: 40px;
+    padding-left: 44px !important;
+    padding-right: 44px !important;
 }
 
 .sola-input::placeholder {
@@ -885,7 +895,9 @@ button#submitBtn,
 /* CRITICAL: Show submit button ONLY when in step 3 */
 .sola-donation-form-wrapper .sola-form-section[data-step="3"].active .sola-submit-btn,
 .sola-form-section[data-step="3"].active button#submitBtn,
-.sola-form-section[data-step="3"].active .sola-submit-btn {
+.sola-form-section[data-step="3"].active .sola-submit-btn,
+.sola-form-section[data-step="3"].active .sola-form-navigation .sola-submit-btn,
+.sola-form-section[data-step="3"].active .sola-form-navigation button#submitBtn {
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
