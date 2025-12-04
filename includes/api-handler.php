@@ -32,7 +32,7 @@ function sola_donation_process_payment($form_data) {
     }
     
     // Prepare API request
-    $api_url = 'https://x1.cardknox.com/gatewayjson';
+    $api_url = 'https://x1.cardknox.com/gateway';
     
     // Format expiry date (MMYY)
     $expiry = $form_data['expiry']; // Already formatted as MMYY from JS
@@ -58,7 +58,7 @@ function sola_donation_process_payment($form_data) {
  * @return array Result
  */
 function sola_donation_process_one_time($form_data, $api_key, $is_sandbox) {
-    $api_url = 'https://x1.cardknox.com/gatewayjson';
+    $api_url = 'https://x1.cardknox.com/gateway';
     
     // Prepare request data
     $request_data = array(
@@ -66,7 +66,7 @@ function sola_donation_process_one_time($form_data, $api_key, $is_sandbox) {
         'xVersion' => '5.0.0',
         'xSoftwareName' => 'Sola Donation Plugin',
         'xSoftwareVersion' => SOLA_DONATION_VERSION,
-        'xCommand' => 'cc:Sale',
+        'xCommand' => 'cc:sale',
         'xAmount' => number_format($form_data['amount'], 2, '.', ''),
         'xCardNum' => $form_data['cardNumber'],
         'xExp' => $form_data['expiry'],
@@ -159,7 +159,7 @@ function sola_donation_process_one_time($form_data, $api_key, $is_sandbox) {
  * @return array Result
  */
 function sola_donation_setup_recurring($form_data, $api_key, $is_sandbox) {
-    $api_url = 'https://x1.cardknox.com/gatewayjson';
+    $api_url = 'https://x1.cardknox.com/gateway';
     
     // First, save the card as a token
     $token_request = array(
@@ -167,7 +167,7 @@ function sola_donation_setup_recurring($form_data, $api_key, $is_sandbox) {
         'xVersion' => '5.0.0',
         'xSoftwareName' => 'Sola Donation Plugin',
         'xSoftwareVersion' => SOLA_DONATION_VERSION,
-        'xCommand' => 'cc:Save',
+        'xCommand' => 'cc:save',
         'xCardNum' => $form_data['cardNumber'],
         'xExp' => $form_data['expiry'],
         'xCVV' => $form_data['cvv'],
@@ -226,7 +226,7 @@ function sola_donation_setup_recurring($form_data, $api_key, $is_sandbox) {
             'xVersion' => '5.0.0',
             'xSoftwareName' => 'Sola Donation Plugin',
             'xSoftwareVersion' => SOLA_DONATION_VERSION,
-            'xCommand' => 'cc:Sale',
+            'xCommand' => 'cc:sale',
             'xAmount' => number_format($form_data['amount'], 2, '.', ''),
             'xToken' => $token,
             'xCurrency' => $form_data['currency'],
