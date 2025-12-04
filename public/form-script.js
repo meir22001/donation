@@ -59,8 +59,9 @@
         $('.sola-form-section').removeClass('active');
         $('.sola-form-section[data-step="1"]').addClass('active');
 
-        // Remove any existing navigation
-        $('.sola-form-navigation').remove();
+        // Remove existing navigation from steps 1 and 2 only (keep step 3 with submit button)
+        $('.sola-form-section[data-step="1"] .sola-form-navigation').remove();
+        $('.sola-form-section[data-step="2"] .sola-form-navigation').remove();
 
         // Add navigation to step 1 (only next)
         $('.sola-form-section[data-step="1"]').append(createNavigation(1));
@@ -68,7 +69,7 @@
         // Add navigation to step 2 (back + next)
         $('.sola-form-section[data-step="2"]').append(createNavigation(2));
 
-        // Step 3 has submit button, no navigation needed
+        // Step 3 has submit button in HTML, no navigation needed
 
         // Navigation handlers
         $(document).on('click', '.btn-next', function () {

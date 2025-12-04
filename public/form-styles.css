@@ -882,39 +882,24 @@ select.sola-input {
     white-space: nowrap;
 }
 
-/* Submit Button - REFINED - Only visible in step 3 - CRITICAL VISIBILITY CONTROL */
-.sola-donation-form-wrapper .sola-submit-btn,
-.sola-donation-form button.sola-submit-btn,
-button#submitBtn,
-.sola-submit-btn {
-    width: 100% !important;
-    padding: 18px 32px !important;
-    background: linear-gradient(135deg, #F49431 0%, #ff9d47 100%) !important;
-    border: none !important;
-    border-radius: 14px !important;
-    color: white !important;
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    cursor: pointer !important;
-    display: none;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    transition: all 0.2s ease !important;
-    margin-top: 0 !important;
-    visibility: hidden;
-    opacity: 0;
-}
-
-/* CRITICAL: Show submit button ONLY when in step 3 */
-.sola-donation-form-wrapper .sola-form-section[data-step="3"].active .sola-submit-btn,
-.sola-form-section[data-step="3"].active button#submitBtn,
-.sola-form-section[data-step="3"].active .sola-submit-btn,
-.sola-form-section[data-step="3"].active .sola-form-navigation .sola-submit-btn,
-.sola-form-section[data-step="3"].active .sola-form-navigation button#submitBtn {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+/* Submit Button - REFINED - Visible in step 3 */
+.sola-submit-btn,
+button#submitBtn {
+    width: 100%;
+    padding: 18px 32px;
+    background: linear-gradient(135deg, #F49431 0%, #ff9d47 100%);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    margin-top: 0;
 }
 
 /* CRITICAL: Ensure button is hidden in steps 1 and 2 */
