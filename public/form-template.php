@@ -332,7 +332,7 @@ if (!defined('ABSPATH')) {
                             </svg>
                         </button>
                     </div>
-                    </div>
+                </div>
                 
                 <!-- Navigation for Step 3 with Submit Button -->
                 <div class="sola-form-navigation">
@@ -363,7 +363,6 @@ if (!defined('ABSPATH')) {
                             </svg>
                         </span>
                     </button>
-                </div>
                 </div>
             </div>
 
