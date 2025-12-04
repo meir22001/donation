@@ -520,6 +520,31 @@
     }
 
     /**
+     * Format expiry date for Sola API (MMYY format)
+     * Ensures month is zero-padded
+     */
+    function formatExpiryForAPI(expiryInput) {
+        // Remove any non-digits
+        let expiry = expiryInput.replace(/\D/g, '');
+
+        // Should be 4 digits: MMYY
+        if (expiry.length !== 4) {
+            return expiry; // Return as-is if invalid length
+        }
+
+        // Extract month and year
+        let month = expiry.substring(0, 2);
+        let year = expiry.substring(2, 4);
+
+        // Ensure month is zero-padded (01-12)
+        if (month.length === 1) {
+            month = '0' + month;
+        }
+
+        return month + year; // Return MMYY
+    }
+
+    /**
      * Form Submission
      */
     function initFormSubmission() {
