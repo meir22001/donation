@@ -202,9 +202,18 @@ function sola_donation_setup_recurring($form_data, $api_key, $is_sandbox) {
     
     if (!isset($token_result['xToken']) || empty($token_result['xToken'])) {
         sola_donation_log('Token creation failed', $token_result);
+        
+        // Get specific error message from API
+        $error_message = 'Failed to save payment method.';
+        if (isset($token_result['xError'])) {
+            $error_message = $token_result['xError'];
+        } elseif (isset($token_result['xResult'])) {
+            $error_message .= ' Result: ' . $token_result['xResult'];
+        }
+        
         return array(
             'success' => false,
-            'message' => 'Failed to save payment method. Please try again.'
+            'message' => $error_message
         );
     }
     
