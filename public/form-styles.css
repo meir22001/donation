@@ -1053,6 +1053,15 @@ button#submitBtn,
     background: #1a1a1a;
 }
 
+/* Logo sizes */
+.google-pay-logo,
+.apple-pay-logo {
+    width: 120px !important;
+    height: 48px !important;
+    max-width: none !important;
+    max-height: none !important;
+}
+
 /* Tooltip for placeholder status */
 .sola-wallet-btn[title]:hover::after {
     content: attr(title);
