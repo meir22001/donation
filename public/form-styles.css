@@ -253,6 +253,11 @@
     margin-bottom: 20px;
 }
 
+/* Align monthly fields at bottom */
+#chargeMonthlyRow {
+    align-items: flex-end;
+}
+
 .sola-form-row:last-child {
     margin-bottom: 0;
 }
@@ -272,6 +277,7 @@
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 14px;
+    min-height: 20px;
 }
 
 /* Input Wrapper */
@@ -890,14 +896,14 @@ button#submitBtn,
     font-size: 18px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
-    display: none !important;
+    display: none;
     align-items: center !important;
     justify-content: center !important;
     gap: 12px !important;
     transition: all 0.2s ease !important;
     margin-top: 0 !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
+    visibility: hidden;
+    opacity: 0;
 }
 
 /* CRITICAL: Show submit button ONLY when in step 3 */
