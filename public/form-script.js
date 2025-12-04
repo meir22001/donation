@@ -707,6 +707,8 @@
             type: 'POST',
             data: formData,
             success: function (response) {
+                console.log('API Response:', response);
+
                 if (response.success) {
                     showMessage('success', msg.success);
 
@@ -720,11 +722,14 @@
                         }
                     }, 2000);
                 } else {
+                    console.error('Payment failed:', response);
                     showMessage('error', response.data.message || msg.error);
                     $btn.removeClass('loading').prop('disabled', false);
                 }
             },
-            error: function () {
+            error: function (xhr, status, error) {
+                console.error('AJAX Error:', { xhr, status, error });
+                console.error('Response Text:', xhr.responseText);
                 showMessage('error', msg.networkError);
                 $btn.removeClass('loading').prop('disabled', false);
             }
