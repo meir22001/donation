@@ -659,7 +659,7 @@
             donationType: donationType,
             amount: parseFloat($('#amount').val() || currentAmount),
             cardNumber: $('#cardNumber').val().replace(/\s/g, ''),
-            expiry: $('#expiry').val().replace('/', ''),
+            expiry: formatExpiryForAPI($('#expiry').val()),
             cvv: $('#cvv').val()
         };
 
@@ -667,6 +667,15 @@
             formData.chargeDay = $('#chargeDay').val();
             formData.chargeNow = $('#chargeNow').is(':checked');
         }
+
+        // Debug log (remove in production)
+        console.log('Sending payment data:', {
+            amount: formData.amount,
+            currency: formData.currency,
+            donationType: formData.donationType,
+            expiryFormatted: formData.expiry,
+            cardLast4: formData.cardNumber.slice(-4)
+        });
 
         $.ajax({
             url: solaDonation.ajaxUrl,

@@ -316,6 +316,18 @@ body[dir="rtl"] .sola-input {
     direction: rtl !important;
 }
 
+/* Force LTR for payment fields - credit card numbers must always be LTR */
+.sola-donation-form-wrapper[dir="rtl"] #cardNumber,
+.sola-donation-form-wrapper[dir="rtl"] #expiry,
+.sola-donation-form-wrapper[dir="rtl"] #cvv,
+[dir="rtl"] #cardNumber,
+[dir="rtl"] #expiry,
+[dir="rtl"] #cvv {
+    direction: ltr !important;
+    text-align: left !important;
+    padding: 14px 14px 14px 44px !important;
+}
+
 [dir="ltr"] .sola-donation-form-wrapper .sola-input,
 [dir="ltr"] .sola-input {
     padding: 14px 14px 14px 14px !important;
